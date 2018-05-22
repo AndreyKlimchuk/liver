@@ -1,0 +1,3 @@
+[submodule "priv/LIVR"]
+	path = priv/LIVR
+	url = https://github.com/koorchik/LIVR.git
