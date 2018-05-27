@@ -13,3 +13,6 @@ liver.d
 src/*.swp
 src/sets/*.swp
 tests/*.swp
+rebar.lock
+_build
+rebar3.crashdump

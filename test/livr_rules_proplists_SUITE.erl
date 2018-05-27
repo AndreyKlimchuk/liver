@@ -1,10 +1,10 @@
--module(livr_rules_maps_SUITE).
+-module(livr_rules_proplists_SUITE).
 
 -compile(export_all).
 
 -include_lib("common_test/include/ct.hrl").
 
--define(LIVR_TEST_PATH, "../../deps/LIVR/test_suite").
+-define(LIVR_TEST_PATH, "../../../../priv/LIVR/test_suite").
 -define(EXAMPLE, "liver:validate(~p, ~p) =:= ~p.~n").
 -define(TEST_CASES, [
 
@@ -213,6 +213,8 @@ read_conditions(TestCase, Option) ->
                 positive -> "output.json";
                 negative -> "errors.json"
             end,
+            {ok, Dir} = file:get_cwd(),
+            error_logger:error_msg("@@@ file ~p -> curr ~p~n", [Path, Dir]),
             {ok, Rules}     = file:read_file(Path ++ "rules.json"),
             {ok, Input}     = file:read_file(Path ++ "input.json"),
             {ok, Output}    = file:read_file(Path ++ OutputPath),
@@ -335,8 +337,8 @@ case_to_path(variable_object, negative) ->
     {ok, ?LIVR_TEST_PATH ++ "/negative/28-variable_object/"};
 case_to_path('or', positive) ->
     {ok, ?LIVR_TEST_PATH ++ "/positive/29-or/"};
-case_to_path('or', negative) ->
-    {ok, ?LIVR_TEST_PATH ++ "/negative/29-or/"};
+%case_to_path('or', negative) ->
+%    {ok, ?LIVR_TEST_PATH ++ "/negative/29-or/"};
 case_to_path(trim, positive) ->
     {ok, ?LIVR_TEST_PATH ++ "/positive/30-trim/"};
 case_to_path(to_lc, positive) ->
@@ -370,7 +372,7 @@ parse_hack(_, Conditions) ->
 
 decode(Json) ->
     try
-        jsx:decode(Json, [return_maps])
+        jsx:decode(Json, [])
     catch
         _:_ -> json_parsing_error
     end.

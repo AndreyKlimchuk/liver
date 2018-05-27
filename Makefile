@@ -14,8 +14,8 @@ ifeq ($(USER),travis)
 	TEST_DEPS += ecoveralls
 endif
 
-TEST_DIR = tests
-CT_OPTS = -cover ./tests/cover.spec
+TEST_DIR = test
+CT_OPTS = -cover ./test/cover.spec
 
 include erlang.mk
 
