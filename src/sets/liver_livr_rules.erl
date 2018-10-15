@@ -48,14 +48,11 @@
 -export([leave_only/3]).
 -export([default/3]).
 
+-include("liver.hrl").
 
 %% API
 %% common rules
-required(_Args, <<>>, _Opts) ->
-    {error, required};
-required(_Args, null, _Opts) ->
-    {error, required};
-required(_Args, undefined, _Opts) ->
+required(_Args, ?MISSED_FIELD_VALUE, _Opts) ->
     {error, required};
 required(_Args, Value, _Opts) ->
     {ok, Value}.
@@ -580,11 +577,7 @@ default([{}], _Value, _Opts) ->
     {ok, [{}]};
 default([Default], _Value, Opts) ->
     default(Default, _Value, Opts);
-default(Default, <<>>, _Opts) ->
-    {ok, Default};
-default(Default, undefined, _Opts) ->
-    {ok, Default};
-default(Default, null, _Opts) ->
+default(Default, ?MISSED_FIELD_VALUE, _Opts) ->
     {ok, Default};
 default(_Default, Value, _Opts) ->
     {ok, Value}.
