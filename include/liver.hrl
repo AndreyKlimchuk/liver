@@ -80,5 +80,3 @@
     fields_not_equal        => <<"FIELDS_NOT_EQUAL">>,
     unknown_field           => <<"UNKNOWN_FIELD">>
 }).
-
--define(MISSED_FIELD_VALUE, '$missed_field').
